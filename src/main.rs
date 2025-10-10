@@ -4,27 +4,19 @@
 
 use core::panic::PanicInfo;
 
+use crate::button::button_congure_interrupt;
+
 mod startup_stm32f303;
-
-static mut SCORES_GLOBAL: [i32; 5] = [1, 2, 3, 4, 5];
-
-const _NUMBERS: [i32; 5] = [1, 2, 3, 4, 5]; // Constant array
-
-static mut BUFFER: [u8; 1024] = [0; 1024]; // Static mutable buffer
+mod led;
+mod button;
 
 #[unsafe(no_mangle)]
 pub extern "C" fn main() -> ! {
-    let mut _total_score = 0;
 
-    unsafe {
-        for score in SCORES_GLOBAL {
-            _total_score += score;
-        }
-    }
-
-    unsafe {
-        BUFFER[0] = 100;
-    }
+    led_init(BLUE_LED);
+    led_off(BLUE_LED);
+    button_init(BUTTON_PIN);
+    button_congure_interrupt(BUTTON_PIN);
 
     loop {}
 }
@@ -32,4 +24,9 @@ pub extern "C" fn main() -> ! {
 #[panic_handler]
 fn panic_handler(_info: &PanicInfo) -> ! {
     loop {}
+}
+
+// Button interrupt handler
+fn EXTI0_Handler() {
+    led_toggle(BLUE_LED);
 }
