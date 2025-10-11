@@ -17,8 +17,8 @@ mod button;
 #[unsafe(no_mangle)]
 pub extern "C" fn main() -> ! {
 
-    led_init(RED_LED);
-    led_off(RED_LED);
+    led_init(GREEN_LED);
+    led_off(GREEN_LED);
     button_init(BUTTON_PIN);
     button_configure_interrupt(BUTTON_PIN);
 
@@ -32,5 +32,5 @@ fn panic_handler(_info: &PanicInfo) -> ! {
 
 // Button interrupt handler
 fn EXTI0_Handler() {
-    led_toggle(RED_LED);
+    led_toggle(GREEN_LED);
 }
