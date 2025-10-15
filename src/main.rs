@@ -5,6 +5,7 @@
 use core::panic::PanicInfo;
 use led::*;
 use button::*;
+use board::*;
 
 use crate::button::button_congure_interrupt;
 
@@ -17,10 +18,10 @@ mod button;
 #[unsafe(no_mangle)]
 pub extern "C" fn main() -> ! {
 
-    led_init(GREEN_LED);
-    led_off(GREEN_LED);
-    button_init(BUTTON_PIN);
-    button_configure_interrupt(BUTTON_PIN);
+    led_init(GREEN_LED_PORT, GREEN_LED_PIN);
+    led_on(GREEN_LED_PORT, GREEN_LED_PIN);
+    //button_init(BUTTON_PIN);
+    //button_configure_interrupt(BUTTON_PIN);
 
     loop {}
 }
@@ -32,5 +33,5 @@ fn panic_handler(_info: &PanicInfo) -> ! {
 
 // Button interrupt handler
 fn EXTI0_Handler() {
-    led_toggle(GREEN_LED);
+    led_toggle(GREEN_LED_PORT, GREEN_LED_PIN);
 }
