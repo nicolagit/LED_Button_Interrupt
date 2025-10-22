@@ -1,6 +1,7 @@
 #![no_std]
 #![no_main]
 #![allow(clippy::empty_loop)]
+#![allow(dead_code)]
 
 use core::panic::PanicInfo;
 use led::*;
@@ -14,6 +15,8 @@ mod mcu;
 mod board;
 mod led;
 mod button;
+mod gpio;
+mod reg;
 
 #[unsafe(no_mangle)]
 pub extern "C" fn main() -> ! {
@@ -32,6 +35,7 @@ fn panic_handler(_info: &PanicInfo) -> ! {
 }
 
 // Button interrupt handler
+#[allow(non_snake_case)]
 fn EXTI0_Handler() {
     led_toggle(GREEN_LED_PORT, GREEN_LED_PIN);
 }
