@@ -1,30 +1,31 @@
 #![no_std]
 #![no_main]
 #![allow(clippy::empty_loop)]
+#![allow(dead_code)]
+#![allow(non_snake_case)]
 
 use core::panic::PanicInfo;
+use led::*;
+//use button::*;
+use board::*;
+
+//use crate::button::button_congure_interrupt;
 
 mod startup_stm32f303;
-
-static mut SCORES_GLOBAL: [i32; 5] = [1, 2, 3, 4, 5];
-
-const _NUMBERS: [i32; 5] = [1, 2, 3, 4, 5]; // Constant array
-
-static mut BUFFER: [u8; 1024] = [0; 1024]; // Static mutable buffer
+mod mcu;
+mod board;
+mod led;
+mod button;
+mod gpio;
+mod reg;
 
 #[unsafe(no_mangle)]
 pub extern "C" fn main() -> ! {
-    let mut _total_score = 0;
 
-    unsafe {
-        for score in SCORES_GLOBAL {
-            _total_score += score;
-        }
-    }
-
-    unsafe {
-        BUFFER[0] = 100;
-    }
+    led_init(GREEN_LED_PORT, GREEN_LED_PIN);
+    led_on(GREEN_LED_PORT, GREEN_LED_PIN);
+    //button_init(BUTTON_PIN);
+    //button_configure_interrupt(BUTTON_PIN);
 
     loop {}
 }
@@ -32,4 +33,10 @@ pub extern "C" fn main() -> ! {
 #[panic_handler]
 fn panic_handler(_info: &PanicInfo) -> ! {
     loop {}
+}
+
+// Button interrupt handler
+#[allow(non_snake_case)]
+fn EXTI0_Handler() {
+    led_toggle(GREEN_LED_PORT, GREEN_LED_PIN);
 }
