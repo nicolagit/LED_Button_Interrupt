@@ -2,13 +2,14 @@
 #![no_main]
 #![allow(clippy::empty_loop)]
 #![allow(dead_code)]
+#![allow(non_snake_case)]
 
 use core::panic::PanicInfo;
 use led::*;
-use button::*;
+//use button::*;
 use board::*;
 
-use crate::button::button_congure_interrupt;
+//use crate::button::button_congure_interrupt;
 
 mod startup_stm32f303;
 mod mcu;

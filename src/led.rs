@@ -2,11 +2,15 @@ use core::ptr;
 use crate::gpio::*;
 
 unsafe fn read_register(addr: *mut u32) -> u32 {
-    ptr::read_volatile(addr)
+    unsafe{
+        ptr::read_volatile(addr)
+    }
 }
 
 unsafe fn write_register(addr: *mut u32, value: u32) {
-    ptr::write_volatile(addr, value)
+    unsafe{
+        ptr::write_volatile(addr, value)
+    }
 }
 
 fn clear_bits(value: u32, mask: u32) -> u32 {
