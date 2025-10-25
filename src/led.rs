@@ -22,13 +22,16 @@ fn set_bits(value: u32, mask: u32) -> u32 {
 }
 
 pub fn led_init(port: u32, pin: u32) {
-    //1. Set the gpio pin mode = output mode
+    //1. Enable the gpio port clock
+    enable_gpio_clock(port);
+
+    //2. Set the gpio pin mode = output mode
     set_gpio_mode_output(port, pin);
 
-    //2. Set the output type = pushpull
+    //3. Set the output type = pushpull
     set_gpio_output_type_push_pull(port, pin);
 
-    //3. Set the output speed (optional)
+    //4. Set the output speed (optional)
 }
 
 pub fn led_on(port: u32, pin: u32) {
