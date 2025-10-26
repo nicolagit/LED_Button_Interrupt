@@ -24,6 +24,7 @@ pub extern "C" fn main() -> ! {
 
     led_init(GREEN_LED_PORT, GREEN_LED_PIN);
     led_on(GREEN_LED_PORT, GREEN_LED_PIN);
+    led_off(GREEN_LED_PORT, GREEN_LED_PIN);
     //button_init(BUTTON_PIN);
     //button_configure_interrupt(BUTTON_PIN);
 
