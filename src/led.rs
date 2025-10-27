@@ -21,6 +21,23 @@ fn set_bits(value: u32, mask: u32) -> u32 {
     value | mask
 }
 
+/// Initializes the LED at the specified port and pin.
+/// 
+/// This function performs the following steps:
+/// 1. Enables the GPIO port clock.
+/// 2. Sets the GPIO pin mode to output mode.
+/// 3. Sets the output type to push-pull.
+/// 4. (Optional) Sets the output speed.
+///
+/// # Parameters
+/// - `port`: The GPIO port where the LED is connected.
+/// - `pin`: The GPIO pin number where the LED is connected.
+/// # Warnings
+/// # Note
+/// # Example
+/// ```
+/// led_init(GPIOA_BASE, GPIO_PIN_0);
+/// ```
 pub fn led_init(port: u32, pin: u32) {
     //1. Enable the gpio port clock
     enable_gpio_clock(port);

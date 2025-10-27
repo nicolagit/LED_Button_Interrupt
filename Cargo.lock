@@ -3,5 +3,5 @@
 version = 4
 
 [[package]]
-name = "my_first_mcu_project"
+name = "led-button-interrupt"
 version = "0.1.0"
