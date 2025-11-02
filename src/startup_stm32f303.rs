@@ -1,4 +1,3 @@
-
 use core::ptr;
 
 // 1. Define the vector table for the mcu
@@ -216,12 +215,12 @@ unsafe extern "C" {
 #[unsafe(no_mangle)] //#[no_mangle]
 unsafe extern "C" fn Reset_Handler() {
     unsafe {
-    // 1. Copy the .data section from FLASH to RAM
+        // 1. Copy the .data section from FLASH to RAM
 
         // reference of static variable to C like raw pointer.
         let mut src_is_flash = ptr::addr_of!(_sidata);
-        let mut dest_is_ram = ptr::addr_of_mut!( _sdata);
-        let data_end_in_ram = ptr::addr_of_mut!( _edata);
+        let mut dest_is_ram = ptr::addr_of_mut!(_sdata);
+        let data_end_in_ram = ptr::addr_of_mut!(_edata);
 
         while dest_is_ram < data_end_in_ram {
             *dest_is_ram = *src_is_flash;
@@ -229,7 +228,7 @@ unsafe extern "C" fn Reset_Handler() {
             src_is_flash = src_is_flash.add(1);
         }
 
-    // 2. Zero out the .bss section in the RAM
+        // 2. Zero out the .bss section in the RAM
         let mut bss = ptr::addr_of_mut!(_sbss);
         let bss_end = ptr::addr_of_mut!(_ebss);
         while bss < bss_end {
@@ -238,7 +237,7 @@ unsafe extern "C" fn Reset_Handler() {
         }
     }
 
-// 3. Call main()
+    // 3. Call main()
     crate::main();
 }
 

@@ -1,20 +1,16 @@
 //! LED control module
-//! 
+//!
 //! This module provides functions to initialize and control an LED connected to a specified GPIO port and pin.
 
-use core::ptr;
 use crate::gpio::*;
+use core::ptr;
 
 unsafe fn read_register(addr: *mut u32) -> u32 {
-    unsafe{
-        ptr::read_volatile(addr)
-    }
+    unsafe { ptr::read_volatile(addr) }
 }
 
 unsafe fn write_register(addr: *mut u32, value: u32) {
-    unsafe{
-        ptr::write_volatile(addr, value)
-    }
+    unsafe { ptr::write_volatile(addr, value) }
 }
 
 fn clear_bits(value: u32, mask: u32) -> u32 {
@@ -26,7 +22,7 @@ fn set_bits(value: u32, mask: u32) -> u32 {
 }
 
 /// Initializes the LED at the specified port and pin.
-/// 
+///
 /// This function performs the following steps:
 /// 1. Enables the GPIO port clock.
 /// 2. Sets the GPIO pin mode to output mode.

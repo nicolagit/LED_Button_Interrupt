@@ -4,28 +4,32 @@
 #![allow(dead_code)]
 #![allow(non_snake_case)]
 
+use board::*;
+use button::*;
 use core::panic::PanicInfo;
 use led::*;
-//use button::*;
-use board::*;
 
 //use crate::button::button_congure_interrupt;
 
-mod startup_stm32f303;
-mod mcu;
 mod board;
-mod led;
 mod button;
 mod gpio;
+mod led;
+mod mcu;
 mod reg;
+mod startup_stm32f303;
 
 #[unsafe(no_mangle)]
 pub extern "C" fn main() -> ! {
-
     led_init(GREEN_LED_PORT, GREEN_LED_PIN);
     led_on(GREEN_LED_PORT, GREEN_LED_PIN);
     led_off(GREEN_LED_PORT, GREEN_LED_PIN);
-    //button_init(BUTTON_PIN);
+
+    button::button_init(
+        USER_BTN_PORT,
+        USER_BTN_PIN,
+        Mode::Interrupt(Trigger::FallingEdge),
+    );
     //button_configure_interrupt(BUTTON_PIN);
 
     loop {}
