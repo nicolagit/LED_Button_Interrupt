@@ -1,3 +1,7 @@
+//! LED control module
+//! 
+//! This module provides functions to initialize and control an LED connected to a specified GPIO port and pin.
+
 use core::ptr;
 use crate::gpio::*;
 
