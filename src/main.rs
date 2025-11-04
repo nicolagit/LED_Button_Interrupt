@@ -18,6 +18,7 @@ mod led;
 mod mcu;
 mod reg;
 mod startup_stm32f303;
+mod exti;
 
 #[unsafe(no_mangle)]
 pub extern "C" fn main() -> ! {

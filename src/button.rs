@@ -1,4 +1,5 @@
 use crate::gpio;
+use crate::exti;
 
 pub enum ButtonStatus {
     Pressed,
@@ -24,9 +25,11 @@ pub fn button_init(port: u32, pin: u32, mode: Mode) {
             match trigger {
                 Trigger::FallingEdge => {
                     // Configure the pin for falling edge detection
+                    exti::gpio::set_edge(pin, exti::gpio::EdgeTrigger::Falling);
                 },
                 Trigger::RisingEdge => {
                     // Configure the pin for rising edge detection
+                    exti::gpio::set_edge(pin, exti::gpio::EdgeTrigger::Rising);
                 },
                 Trigger::BothEdges => {
                     // do nothing
