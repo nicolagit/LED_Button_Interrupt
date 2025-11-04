@@ -15,7 +15,6 @@ pub fn enable_gpio_clock(port: u32) {
             reg_set_bit(rcc_ahbenr_addr, 18, true);
         }
 
-        //GPIOB_BASE,
         //GPIOC_BASE,
         _ => {} //catch all pattern, do nothing for values other than GPIOA_BASE
     }
