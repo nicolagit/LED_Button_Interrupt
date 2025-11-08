@@ -35,6 +35,12 @@ pub fn button_init(port: u32, pin: u32, mode: Mode) {
                     // do nothing
                 },
             }
+
+            // enable the interrupt in exti
+            if let Some(exti_line) = exti::ExtiLine::from_pin(pin) {
+                exti::enable_interrupt(exti_line);
+            }
+            exti::enable_interrupt(exti::ExtiLine::Line13);
         }
         Mode::Input => {
             // do nothing

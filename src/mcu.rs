@@ -9,3 +9,5 @@ pub const GPIO_PIN_3: u32 = 3; // Green LED LD1 is on PB3
 pub const GPIO_PIN_13: u32 = 13; // User button B1 (PC13)
 
 pub const RCC_BASE: u32 = 0x4002_1000;
+
+pub const EXTI_BASE: u32 = 0x4002_0400;
